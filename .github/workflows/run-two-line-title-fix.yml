@@ -1,0 +1,30 @@
+name: Enforce two-line section titles
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/run-two-line-title-fix.yml'
+      - 'scripts/enforce_two_line_titles.py'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply two-line title layout
+        run: python3 scripts/enforce_two_line_titles.py
+      - name: Commit updated HTML
+        run: |
+          if git diff --quiet -- index.html home1.html; then
+            echo "No changes required"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html home1.html
+          git commit -m "Keep major section titles within two lines"
+          git push
