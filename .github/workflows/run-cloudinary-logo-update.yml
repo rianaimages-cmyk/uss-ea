@@ -1,0 +1,29 @@
+name: Apply Cloudinary USS logos
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/run-cloudinary-logo-update.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update logo references
+        run: python3 scripts/apply_cloudinary_logos.py
+      - name: Commit updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html home1.html
+          if git diff --cached --quiet; then
+            echo "No changes required"
+            exit 0
+          fi
+          git commit -m "Use supplied USS Cloudinary logos"
+          git push
