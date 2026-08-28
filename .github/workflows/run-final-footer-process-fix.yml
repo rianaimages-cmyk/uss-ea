@@ -1,0 +1,30 @@
+name: Apply final footer and process fix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/run-final-footer-process-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply final footer and process patch
+        run: python3 scripts/finalize_footer_and_process.py
+      - name: Commit corrected homepage files
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html home1.html
+          if git diff --cached --quiet; then
+            echo "No changes required"
+            exit 0
+          fi
+          git commit -m "Move contact banner into footer and make process section red"
+          git push
