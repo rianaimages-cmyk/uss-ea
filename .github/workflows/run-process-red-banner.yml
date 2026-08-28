@@ -1,0 +1,29 @@
+name: Apply red process banner
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/run-process-red-banner.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply red process banner
+        run: python3 scripts/redesign_process_red_banner.py
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html home1.html
+          if git diff --cached --quiet; then
+            echo "No changes required"
+            exit 0
+          fi
+          git commit -m "Redesign process journey as red banner"
+          git push
