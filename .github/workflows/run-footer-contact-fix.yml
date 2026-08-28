@@ -1,0 +1,30 @@
+name: Apply footer contact fix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/apply_footer_contact.py'
+      - '.github/workflows/run-footer-contact-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply patch
+        run: python3 scripts/apply_footer_contact.py
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html home1.html
+          if git diff --cached --quiet; then
+            echo "No changes required"
+            exit 0
+          fi
+          git commit -m "Apply footer contact banner and red accents"
+          git push
