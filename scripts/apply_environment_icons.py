@@ -1,5 +1,6 @@
 from pathlib import Path
 import re
+from html import escape
 
 ICONS = {
     'Hospitality': 'https://res.cloudinary.com/dwbjlidhm/image/upload/e_colorize:100,co_rgb:14568D/v1787905192/Hospitality_rtttuv.svg',
@@ -25,6 +26,7 @@ CSS=r'''
       border:1px solid rgba(255,255,255,.42) !important;
       box-shadow:0 8px 20px rgba(0,0,0,.12) !important;
     }
+    .environments-section .environment-icon svg{display:none !important;}
     .environments-section .environment-icon img{
       display:block;
       width:100%;
@@ -41,8 +43,9 @@ for filename in ('index.html','home1.html'):
     text=p.read_text(encoding='utf-8')
 
     for title, url in ICONS.items():
+        html_title = escape(title)
         pattern = re.compile(
-            r'(<article class="environment-item" role="listitem"><div class="environment-icon">).*?(</div><h3>'+re.escape(title)+r'</h3></article>)',
+            r'(<article class="environment-item" role="listitem"><div class="environment-icon">).*?(</div><h3>'+re.escape(html_title)+r'</h3></article>)',
             re.S
         )
         replacement = r'\1<img alt="" aria-hidden="true" src="' + url + r'"/>\2'
