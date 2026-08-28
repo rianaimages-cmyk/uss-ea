@@ -1,6 +1,7 @@
 from pathlib import Path
 import re
 
+CORRECT_LOGO='https://res.cloudinary.com/dwbjlidhm/image/upload/v1787903501/RIANA_fiunlc.png'
 CSS_MARKER='HOME NAV DROPDOWN'
 CSS=r'''
 
@@ -77,10 +78,7 @@ CSS=r'''
       background:#f2f6fa;
       color:var(--uss-blue) !important;
     }
-
-    .mobile-home-group{
-      border-radius:12px;
-    }
+    .mobile-home-group{border-radius:12px;}
     .mobile-home-main{
       display:flex !important;
       align-items:center;
@@ -97,15 +95,9 @@ CSS=r'''
     }
 '''
 
-DESKTOP_RE=re.compile(
-    r'<a(?P<a1>[^>]*)href="(?P<h1>[^"]*)"(?P<a2>[^>]*)>\s*Home\s*</a>\s*'
-    r'<a(?P<b1>[^>]*)href="(?P<h2>[^"]*)"(?P<b2>[^>]*)>\s*Home\s*1\s*</a>',
-    re.I
-)
-
-MOBILE_RE=re.compile(
-    r'<a(?P<a1>[^>]*)href="(?P<h1>[^"]*)"(?P<a2>[^>]*)>\s*Home\s*</a>\s*'
-    r'<a(?P<b1>[^>]*)href="(?P<h2>[^"]*)"(?P<b2>[^>]*)>\s*Home\s*1\s*</a>',
+PAIR_RE=re.compile(
+    r'<a[^>]*href="(?:index\.html|/|#)"[^>]*>\s*Home\s*</a>\s*'
+    r'<a[^>]*href="home1\.html"[^>]*>\s*Home\s*1\s*</a>',
     re.I
 )
 
@@ -113,34 +105,33 @@ for filename in ('index.html','home1.html'):
     p=Path(filename)
     text=p.read_text(encoding='utf-8')
 
-    # Use file names as reliable destinations regardless of prior href form.
+    # Correct header logo: use the supplied USS logo instead of the temporary SVG fallback.
+    text=text.replace('src="assets/uss-logo.svg"', f'src="{CORRECT_LOGO}"')
+
     desktop='''<div class="nav-home-dropdown">
 <a class="nav-home-trigger" href="index.html">Home <span class="nav-home-chevron" aria-hidden="true"></span></a>
 <div class="nav-home-menu"><a href="home1.html"''' + (' class="is-active"' if filename=='home1.html' else '') + '''>Home 1</a></div>
 </div>'''
 
-    # Replace the first Home/Home 1 pair in desktop nav.
-    nav_start=text.find('<div class="nav-links">')
-    nav_end=text.find('</div>',nav_start)
+    nav_start=text.find('<nav aria-label="Primary navigation" class="nav-links">')
+    nav_end=text.find('</nav>',nav_start)
     if nav_start>=0 and nav_end>nav_start:
         block=text[nav_start:nav_end+6]
-        new_block,count=DESKTOP_RE.subn(desktop,block,count=1)
+        new_block,count=PAIR_RE.subn(desktop,block,count=1)
         if count:
             text=text[:nav_start]+new_block+text[nav_end+6:]
 
-    # Replace the first Home/Home 1 pair inside mobile menu.
-    mobile_start=text.find('<div class="mobile-menu">')
-    if mobile_start>=0:
-        mobile_end=text.find('</div>',mobile_start)
-        if mobile_end>mobile_start:
-            block=text[mobile_start:mobile_end+6]
-            mobile='''<div class="mobile-home-group">
+    mobile_start=text.find('<nav aria-label="Mobile navigation" class="mobile-menu">')
+    mobile_end=text.find('</nav>',mobile_start)
+    if mobile_start>=0 and mobile_end>mobile_start:
+        block=text[mobile_start:mobile_end+6]
+        mobile='''<div class="mobile-home-group">
 <a class="mobile-home-main" href="index.html">Home <span aria-hidden="true">⌄</span></a>
 <a class="mobile-home-sub" href="home1.html">Home 1</a>
 </div>'''
-            new_block,count=MOBILE_RE.subn(mobile,block,count=1)
-            if count:
-                text=text[:mobile_start]+new_block+text[mobile_end+6:]
+        new_block,count=PAIR_RE.subn(mobile,block,count=1)
+        if count:
+            text=text[:mobile_start]+new_block+text[mobile_end+6:]
 
     if CSS_MARKER not in text:
         pos=text.rfind('</style>')
