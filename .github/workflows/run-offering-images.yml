@@ -1,0 +1,30 @@
+name: Update offering images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/update_offering_images.py'
+      - '.github/workflows/run-offering-images.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply offering image updates
+        run: python3 scripts/update_offering_images.py
+      - name: Commit offering image updates
+        run: |
+          if git diff --quiet -- index.html home1.html; then
+            echo "No changes required"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html home1.html
+          git commit -m "Update Our Offerings imagery"
+          git push
