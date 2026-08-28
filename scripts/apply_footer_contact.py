@@ -1,0 +1,113 @@
+from pathlib import Path
+
+MARKER = 'USS FOOTER CONTACT BANNER'
+
+CSS = r'''
+
+    /* USS FOOTER CONTACT BANNER */
+    .final-cta{
+      background:
+        radial-gradient(circle at 85% 10%,rgba(255,255,255,.13),transparent 28%),
+        linear-gradient(118deg,#b8141c 0%,#e2212a 52%,#bd151d 100%);
+    }
+    .final-cta::before{
+      width:520px;
+      height:520px;
+      right:-140px;
+      top:-220px;
+      background:radial-gradient(circle,rgba(8,47,86,.38),rgba(8,47,86,0) 68%);
+    }
+    .final-cta .section-number{color:rgba(255,255,255,.78)!important;}
+    .final-cta .cta-primary{background:var(--uss-blue);box-shadow:0 14px 30px rgba(3,40,72,.22);}
+    .final-cta .cta-primary:hover{background:var(--uss-blue-dark);}
+
+    .footer-contact-banner{
+      position:relative;z-index:5;margin:-38px auto 54px;display:grid;
+      grid-template-columns:250px 1fr;overflow:hidden;border-radius:28px;
+      background:#0a2542;border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 24px 56px rgba(0,0,0,.28);
+    }
+    .footer-contact-brand{
+      min-height:142px;display:flex;align-items:center;justify-content:center;padding:26px;
+      background:linear-gradient(145deg,#e2212a,#b9151d);
+    }
+    .footer-contact-brand img{width:min(175px,100%);height:auto;object-fit:contain;filter:brightness(0) invert(1);}
+    .footer-contact-details{display:grid;grid-template-columns:1.15fr 1fr 1.45fr;align-items:stretch;min-width:0;}
+    .footer-contact-item{display:flex;align-items:center;gap:15px;min-width:0;padding:25px 26px;}
+    .footer-contact-item:not(:last-child){border-right:1px solid rgba(255,255,255,.10);}
+    .footer-contact-icon{
+      flex:0 0 46px;width:46px;height:46px;display:grid;place-items:center;border-radius:50%;
+      background:rgba(255,255,255,.10);color:#fff;
+    }
+    .footer-contact-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+    .footer-contact-copy{min-width:0;}
+    .footer-contact-copy span{display:block;margin-bottom:6px;color:rgba(255,255,255,.58);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;}
+    .footer-contact-copy strong,.footer-contact-copy a{display:block;color:#fff;font-size:15px;line-height:1.38;font-weight:800;overflow-wrap:anywhere;}
+    .footer-contact-copy a:hover{color:#81ccfb;}
+    .site-footer{padding-top:86px;}
+    .footer-contact-placeholder{color:rgba(255,255,255,.68);line-height:1.55;}
+
+    @media (max-width:980px){
+      .footer-contact-banner{grid-template-columns:190px 1fr;margin-top:-30px;}
+      .footer-contact-brand{min-height:126px;}
+      .footer-contact-details{grid-template-columns:1fr 1fr;}
+      .footer-contact-item:last-child{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.10);}
+      .footer-contact-item:nth-child(2){border-right:0;}
+    }
+    @media (max-width:680px){
+      .footer-contact-banner{grid-template-columns:1fr;margin:-24px auto 38px;border-radius:22px;}
+      .footer-contact-brand{min-height:105px;padding:20px;}
+      .footer-contact-brand img{width:150px;}
+      .footer-contact-details{grid-template-columns:1fr;}
+      .footer-contact-item{padding:20px 18px;}
+      .footer-contact-item:not(:last-child){border-right:0;border-bottom:1px solid rgba(255,255,255,.10);}
+      .footer-contact-item:last-child{grid-column:auto;border-top:0;}
+      .site-footer{padding-top:68px;}
+    }
+'''
+
+BANNER = r'''<div class="shell">
+<div class="footer-contact-banner" aria-label="USS contact information">
+<div class="footer-contact-brand"><img alt="USS by RIANA Group" src="assets/uss-logo.png"/></div>
+<div class="footer-contact-details">
+<div class="footer-contact-item">
+<div class="footer-contact-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7.5 4.5 10 8l-1.7 2.1a15.4 15.4 0 0 0 5.6 5.6L16 14l3.5 2.5v2.2a1.8 1.8 0 0 1-1.8 1.8C10 20.5 3.5 14 3.5 6.3A1.8 1.8 0 0 1 5.3 4.5h2.2Z"/></svg></div>
+<div class="footer-contact-copy"><span>Phone number</span><a href="tel:+254785925000">+254 785 925 000</a></div>
+</div>
+<div class="footer-contact-item">
+<div class="footer-contact-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></div>
+<div class="footer-contact-copy"><span>Email address</span><a href="mailto:contactus.uss@riana.co">contactus.uss@riana.co</a></div>
+</div>
+<div class="footer-contact-item">
+<div class="footer-contact-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></svg></div>
+<div class="footer-contact-copy"><span>Location</span><strong>6th Floor Segen Plaza 96 Riverside Drive Nairobi, Kenya</strong></div>
+</div>
+</div>
+</div>
+</div>
+'''
+
+ANCHOR = '</section>\n<footer class="site-footer" id="footer">'
+REPLACEMENT = '</section>\n' + BANNER + '<footer class="site-footer" id="footer">'
+
+for filename in ('index.html', 'home1.html'):
+    path = Path(filename)
+    text = path.read_text(encoding='utf-8')
+
+    if MARKER not in text:
+        pos = text.rfind('</style>')
+        if pos < 0:
+            raise SystemExit(f'No </style> found in {filename}')
+        text = text[:pos] + CSS + '\n  ' + text[pos:]
+
+    body_pos = text.find('<body')
+    if 'footer-contact-banner' not in text[body_pos:]:
+        if ANCHOR not in text:
+            raise SystemExit(f'Footer anchor not found in {filename}')
+        text = text.replace(ANCHOR, REPLACEMENT, 1)
+
+    text = text.replace('<p class="footer-contact-placeholder">Physical address</p>', '<p class="footer-contact-placeholder">6th Floor Segen Plaza 96 Riverside Drive Nairobi, Kenya</p>')
+    text = text.replace('<p class="footer-contact-placeholder">Telephone number</p>', '<p class="footer-contact-placeholder"><a href="tel:+254785925000">+254 785 925 000</a></p>')
+    text = text.replace('<p class="footer-contact-placeholder">Email address</p>', '<p class="footer-contact-placeholder"><a href="mailto:contactus.uss@riana.co">contactus.uss@riana.co</a></p>')
+
+    path.write_text(text, encoding='utf-8')
