@@ -2789,10 +2789,13 @@
 <div class="shell">
 <header class="navbar">
 <a aria-label="USS by RIANA Group home" class="brand" href="index.html">
-<img alt="USS by RIANA Group" src="assets/uss-logo.svg"/>
+<img alt="USS by RIANA Group" src="https://res.cloudinary.com/dwbjlidhm/image/upload/v1787903501/RIANA_fiunlc.png"/>
 </a>
 <nav aria-label="Primary navigation" class="nav-links">
-<a href="index.html">Home</a><a class="active" href="home1.html">Home 1</a><a href="#about-us">About Us</a>
+<div class="nav-home-dropdown">
+<a class="nav-home-trigger" href="index.html">Home <span class="nav-home-chevron" aria-hidden="true"></span></a>
+<div class="nav-home-menu"><a href="home1.html" class="is-active">Home 1</a></div>
+</div><a href="#about-us">About Us</a>
 <a href="#our-offerings">Our Offerings</a>
 <a href="#technology-partners">Our Partners</a>
 <a href="#case-studies">Case Studies</a>
@@ -2803,7 +2806,10 @@
 <input class="menu-check" id="menu-check" type="checkbox"/>
 <label aria-label="Open navigation" class="menu-trigger" for="menu-check"><span></span></label>
 <nav aria-label="Mobile navigation" class="mobile-menu">
-<a href="index.html">Home</a><a class="active" href="home1.html">Home 1</a><a href="#about-us">About Us</a>
+<div class="mobile-home-group">
+<a class="mobile-home-main" href="index.html">Home <span aria-hidden="true">⌄</span></a>
+<a class="mobile-home-sub" href="home1.html">Home 1</a>
+</div><a href="#about-us">About Us</a>
 <a href="#our-offerings">Our Offerings</a>
 <a href="#technology-partners">Our Partners</a>
 <a href="#case-studies">Case Studies</a>
