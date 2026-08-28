@@ -1,0 +1,30 @@
+name: Update Home 1 hero images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/update_home1_hero_images.py'
+      - '.github/workflows/run-home1-hero-images.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update Home 1 hero
+        run: python3 scripts/update_home1_hero_images.py
+      - name: Commit Home 1 hero changes
+        run: |
+          if git diff --quiet -- home1.html; then
+            echo "No changes required"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add home1.html
+          git commit -m "Use new Home 1 hero images"
+          git push
