@@ -2494,6 +2494,108 @@
       .why-section .process-step p{font-size:13.5px !important;line-height:1.66 !important;}
     }
 
+  
+
+    /* FINAL FOOTER + PROCESS PLACEMENT FIX */
+    .why-section .process-heading{
+      margin:64px 0 0 !important;
+      padding:46px 56px 16px !important;
+      background:linear-gradient(135deg,#e2212a 0%,#c9151d 58%,#ad1017 100%) !important;
+      border-radius:34px 34px 0 0 !important;
+      text-align:center !important;
+      box-shadow:0 24px 58px rgba(173,16,23,.18) !important;
+    }
+    .why-section .process-heading h3{
+      max-width:1100px !important;
+      margin:0 auto !important;
+      color:#fff !important;
+      font-size:clamp(30px,2.45vw,42px) !important;
+      line-height:1.1 !important;
+    }
+    .why-section .process-journey{
+      display:grid !important;
+      grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+      gap:28px !important;
+      padding:22px 30px 34px !important;
+      background:linear-gradient(135deg,#e2212a 0%,#c9151d 58%,#ad1017 100%) !important;
+      border:0 !important;
+      border-radius:0 0 34px 34px !important;
+      box-shadow:0 24px 58px rgba(173,16,23,.18) !important;
+      overflow:visible !important;
+    }
+    .why-section .process-journey::before{display:none !important;}
+    .why-section .process-step{
+      min-height:250px !important;
+      padding:30px 26px 28px !important;
+      text-align:left !important;
+      border-radius:24px !important;
+      background:rgba(255,255,255,.10) !important;
+      border:1px solid rgba(255,255,255,.16) !important;
+      box-shadow:none !important;
+    }
+    .why-section .process-step:not(:last-child)::after{display:none !important;}
+    .why-section .process-number{
+      width:auto !important;height:auto !important;
+      margin:0 0 26px !important;
+      padding:10px 14px !important;
+      border-radius:999px !important;
+      background:rgba(255,255,255,.16) !important;
+      border:1px solid rgba(255,255,255,.24) !important;
+      color:#fff !important;
+      box-shadow:none !important;
+    }
+    .why-section .process-step:last-child .process-number{
+      background:#fff !important;
+      color:#d51d24 !important;
+      border-color:#fff !important;
+    }
+    .why-section .process-step h4{
+      color:#fff !important;
+      font-size:22px !important;
+      margin-bottom:11px !important;
+    }
+    .why-section .process-step p{
+      max-width:none !important;
+      margin:0 !important;
+      color:rgba(255,255,255,.92) !important;
+      font-size:14px !important;
+      line-height:1.72 !important;
+    }
+
+    .site-footer{
+      position:relative !important;
+      padding-top:72px !important;
+      background:#06172b !important;
+    }
+    .footer-contact-shell{
+      width:min(var(--container),calc(100% - 48px));
+      margin:0 auto 56px;
+    }
+    .site-footer .footer-contact-banner{
+      margin:0 !important;
+      transform:none !important;
+      box-shadow:0 22px 52px rgba(0,0,0,.26) !important;
+      background:#0a2a4b !important;
+    }
+    .site-footer .footer-contact-brand{
+      background:linear-gradient(145deg,#e2212a,#b9141c) !important;
+    }
+
+    @media (max-width:980px){
+      .why-section .process-heading{padding:36px 28px 14px !important;}
+      .why-section .process-journey{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:18px !important;padding:18px 18px 22px !important;}
+      .why-section .process-step{min-height:220px !important;}
+      .footer-contact-shell{width:min(100% - 30px,var(--container));}
+    }
+    @media (max-width:680px){
+      .why-section .process-heading{margin-top:46px !important;padding:28px 18px 10px !important;border-radius:24px 24px 0 0 !important;}
+      .why-section .process-heading h3{font-size:clamp(24px,7vw,32px) !important;}
+      .why-section .process-journey{grid-template-columns:1fr !important;gap:14px !important;padding:14px 14px 16px !important;border-radius:0 0 24px 24px !important;}
+      .why-section .process-step{min-height:auto !important;padding:22px 18px 20px !important;border-radius:18px !important;}
+      .site-footer{padding-top:48px !important;}
+      .footer-contact-shell{width:calc(100% - 24px);margin-bottom:40px;}
+    }
+
   </style>
 </head>
 <body class="home-one">
@@ -2512,7 +2614,7 @@
 <div class="shell">
 <header class="navbar">
 <a aria-label="USS by RIANA Group home" class="brand" href="index.html">
-<img alt="USS by RIANA Group" src="assets/uss-logo.png"/>
+<img alt="USS by RIANA Group" src="assets/uss-logo.svg"/>
 </a>
 <nav aria-label="Primary navigation" class="nav-links">
 <a href="index.html">Home</a><a class="active" href="home1.html">Home 1</a><a href="#about-us">About Us</a>
@@ -2846,9 +2948,10 @@
 </div>
 </div>
 </section>
-<div class="shell">
+<footer class="site-footer" id="footer">
+<div class="footer-contact-shell">
 <div class="footer-contact-banner" aria-label="USS contact information">
-<div class="footer-contact-brand"><img alt="USS by RIANA Group" src="assets/uss-logo.png"/></div>
+<div class="footer-contact-brand"><img alt="USS by RIANA Group" src="assets/uss-logo.svg"/></div>
 <div class="footer-contact-details">
 <div class="footer-contact-item">
 <div class="footer-contact-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7.5 4.5 10 8l-1.7 2.1a15.4 15.4 0 0 0 5.6 5.6L16 14l3.5 2.5v2.2a1.8 1.8 0 0 1-1.8 1.8C10 20.5 3.5 14 3.5 6.3A1.8 1.8 0 0 1 5.3 4.5h2.2Z"/></svg></div>
@@ -2865,11 +2968,11 @@
 </div>
 </div>
 </div>
-<footer class="site-footer" id="footer">
+</div>
 <div class="shell">
 <div class="footer-grid">
 <div class="footer-brand">
-<img alt="USS by RIANA Group" src="assets/uss-logo.png"/>
+<img alt="USS by RIANA Group" src="assets/uss-logo.svg"/>
 <p>USS is a subsidiary of the RIANA GROUP</p>
 </div>
 <div class="footer-col">
