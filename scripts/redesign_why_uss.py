@@ -11,7 +11,7 @@ CSS = r'''
       overflow:hidden;
     }
     .why-head{
-      max-width:760px;
+      max-width:860px;
       margin-bottom:38px;
     }
     .why-head h2{
@@ -22,14 +22,14 @@ CSS = r'''
     }
     .why-layout-new{
       display:grid;
-      grid-template-columns:minmax(290px,.82fr) minmax(520px,1.18fr);
+      grid-template-columns:minmax(250px,.62fr) minmax(520px,1.38fr);
       gap:28px;
       align-items:stretch;
       margin-bottom:68px;
     }
     .why-visual-panel{
       position:relative;
-      min-height:500px;
+      min-height:360px;
       overflow:hidden;
       padding:34px;
       border-radius:28px;
@@ -73,34 +73,13 @@ CSS = r'''
       background:var(--uss-red);
       box-shadow:0 0 0 4px rgba(226,33,42,.16);
     }
-    .why-visual-panel h3{
-      position:relative;
-      z-index:2;
-      max-width:390px;
-      margin-top:44px;
-      color:#fff;
-      font-size:clamp(31px,2.8vw,45px);
-      line-height:1.03;
-      letter-spacing:-.04em;
-    }
-    .why-visual-panel p{
-      position:absolute;
-      z-index:2;
-      left:34px;
-      right:34px;
-      bottom:34px;
-      max-width:390px;
-      color:rgba(255,255,255,.72);
-      font-size:14px;
-      line-height:1.65;
-    }
     .why-visual-index{
       position:absolute;
       z-index:1;
       right:22px;
-      top:32px;
-      color:rgba(255,255,255,.075);
-      font-size:128px;
+      bottom:24px;
+      color:rgba(255,255,255,.09);
+      font-size:150px;
       line-height:.8;
       font-weight:900;
       letter-spacing:-.08em;
@@ -187,17 +166,14 @@ CSS = r'''
 
     @media (max-width:980px){
       .why-layout-new{grid-template-columns:1fr;}
-      .why-visual-panel{min-height:330px;}
-      .why-visual-panel p{max-width:560px;}
+      .why-visual-panel{min-height:180px;}
+      .why-visual-index{font-size:112px;}
     }
     @media (max-width:680px){
       .why-section{padding:72px 0;}
       .why-head{margin-bottom:26px;}
-      .why-layout-new{gap:16px;margin-bottom:48px;}
-      .why-visual-panel{min-height:280px;padding:24px;border-radius:22px;}
-      .why-visual-panel h3{margin-top:30px;font-size:30px;}
-      .why-visual-panel p{left:24px;right:24px;bottom:24px;font-size:13px;}
-      .why-visual-index{font-size:92px;right:18px;top:24px;}
+      .why-layout-new{display:block;margin-bottom:48px;}
+      .why-visual-panel{display:none;}
       .why-item-new{border-radius:16px;}
       .why-item-new summary{grid-template-columns:46px 1fr 34px;gap:12px;min-height:76px;padding:12px;}
       .why-item-number{width:42px;height:42px;border-radius:12px;}
@@ -207,11 +183,9 @@ CSS = r'''
 '''
 
 NEW_BLOCK = r'''<div class="why-layout-new">
-<div class="why-visual-panel">
+<div class="why-visual-panel" aria-hidden="true">
 <div class="why-visual-kicker">Why USS</div>
 <div class="why-visual-index">05</div>
-<h3>From security assessment to long-term support</h3>
-<p>USS supports clients from initial assessment and solution design through integration, scalability and ongoing system maintenance.</p>
 </div>
 <div class="why-accordion">
 <details class="why-item-new" open>
@@ -242,7 +216,24 @@ for filename in ('index.html','home1.html'):
     path = Path(filename)
     text = path.read_text(encoding='utf-8')
 
-    if MARKER not in text:
+    # Replace the current Why USS redesign CSS if already present.
+    css_start = text.find('    /* WHY USS ACCORDION REDESIGN */')
+    if css_start >= 0:
+        css_end = text.find('  </style>', css_start)
+        if css_end < 0:
+            raise SystemExit(f'CSS end not found in {filename}')
+        # Preserve any CSS after the old Why USS block by finding the next later marker when present.
+        next_markers = [
+            text.find('    /* PROCESS RED BANNER OVERRIDE */', css_start + 10),
+            text.find('    /* FINAL FOOTER + PROCESS PLACEMENT FIX */', css_start + 10),
+            text.find('    /* CLOUDINARY ENVIRONMENT ICONS */', css_start + 10),
+            text.find('    /* ENV FOOTER REPAIR', css_start + 10),
+            text.find('    /* HOME NAV DROPDOWN */', css_start + 10),
+        ]
+        next_markers = [m for m in next_markers if m >= 0]
+        old_css_end = min(next_markers) if next_markers else css_end
+        text = text[:css_start] + CSS + '\n' + text[old_css_end:]
+    else:
         pos = text.rfind('</style>')
         if pos < 0:
             raise SystemExit(f'No </style> found in {filename}')
@@ -252,10 +243,12 @@ for filename in ('index.html','home1.html'):
     if section_start < 0:
         raise SystemExit(f'Why USS section not found in {filename}')
 
-    grid_start = text.find('<div class="why-grid">', section_start)
-    process_start = text.find('<div class="process-heading">', grid_start)
-    if grid_start < 0 or process_start < 0:
-        raise SystemExit(f'Why USS grid markers not found in {filename}')
+    block_start = text.find('<div class="why-layout-new">', section_start)
+    process_start = text.find('<div class="process-heading">', section_start)
+    if block_start < 0:
+        block_start = text.find('<div class="why-grid">', section_start)
+    if block_start < 0 or process_start < 0:
+        raise SystemExit(f'Why USS block markers not found in {filename}')
 
-    text = text[:grid_start] + NEW_BLOCK + text[process_start:]
+    text = text[:block_start] + NEW_BLOCK + text[process_start:]
     path.write_text(text, encoding='utf-8')
