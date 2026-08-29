@@ -2617,6 +2617,41 @@
       .stat::before{left:24px;width:34px;}
     }
 
+  
+
+    /* SUBTLE QUOTE BUTTON PULSE */
+    .quote-btn{
+      position:relative;
+      isolation:isolate;
+    }
+    .quote-btn::after{
+      content:"";
+      position:absolute;
+      inset:-5px;
+      border:2px solid rgba(226,33,42,.34);
+      border-radius:999px;
+      opacity:0;
+      pointer-events:none;
+      z-index:-1;
+      animation:quotePulse 2.8s ease-out infinite;
+    }
+    @keyframes quotePulse{
+      0%,68%{
+        transform:scale(.98);
+        opacity:0;
+      }
+      76%{
+        opacity:.32;
+      }
+      100%{
+        transform:scale(1.10);
+        opacity:0;
+      }
+    }
+    @media (prefers-reduced-motion:reduce){
+      .quote-btn::after{animation:none;}
+    }
+
   </style>
 </head>
 <body>
