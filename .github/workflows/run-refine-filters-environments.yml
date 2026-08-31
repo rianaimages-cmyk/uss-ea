@@ -1,0 +1,30 @@
+name: Refine filters and environments
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/refine_filters_and_environments.py'
+      - '.github/workflows/run-refine-filters-environments.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply refinements
+        run: python3 scripts/refine_filters_and_environments.py
+      - name: Commit refinements
+        run: |
+          if git diff --quiet -- index.html home1.html; then
+            echo "No changes required"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html home1.html
+          git commit -m "Refine filters and environment cards"
+          git push
