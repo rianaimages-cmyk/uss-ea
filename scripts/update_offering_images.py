@@ -58,6 +58,30 @@ NEW_OFFERING_IMAGES = [
             "assets/placeholders/ip-telephone-system.svg",
         ],
     ),
+    (
+        "https://res.cloudinary.com/dwbjlidhm/image/upload/v1788180534/vehicular_entrance_control_pngcbc.png",
+        [
+            "assets/placeholders/vehicular-entrance-control.svg",
+            "assets/placeholders/vehicle-entrance-control.svg",
+            "assets/placeholders/vehicular-access-control.svg",
+        ],
+    ),
+    (
+        "https://res.cloudinary.com/dwbjlidhm/image/upload/v1788179915/board_room_solutions_z6qncu.png",
+        [
+            "assets/placeholders/boardroom-solutions.svg",
+            "assets/placeholders/board-room-solutions.svg",
+            "assets/placeholders/boardroom.svg",
+        ],
+    ),
+    (
+        "https://res.cloudinary.com/dwbjlidhm/image/upload/v1788179915/perimeter_detection_system_zbhxdt.png",
+        [
+            "assets/placeholders/perimeter-detection-system.svg",
+            "assets/placeholders/perimeter-security.svg",
+            "assets/placeholders/perimeter-security-system.svg",
+        ],
+    ),
 ]
 
 for filename in ("index.html", "home1.html"):
