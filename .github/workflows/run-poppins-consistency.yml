@@ -1,0 +1,30 @@
+name: Apply Poppins and typography consistency
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/apply_poppins_and_home1_consistency.py'
+      - '.github/workflows/run-poppins-consistency.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply font and typography updates
+        run: python3 scripts/apply_poppins_and_home1_consistency.py
+      - name: Commit website updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html home1.html
+          if git diff --cached --quiet; then
+            echo "No changes required"
+            exit 0
+          fi
+          git commit -m "Apply Poppins and consistent section typography"
+          git push
