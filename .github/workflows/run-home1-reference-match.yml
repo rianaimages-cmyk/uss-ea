@@ -1,0 +1,30 @@
+name: Match Home 1 approval reference
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/home1_match_reference.py'
+      - '.github/workflows/run-home1-reference-match.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply Home 1 reference styling
+        run: python3 scripts/home1_match_reference.py
+      - name: Commit Home 1 reference changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add home1.html
+          if git diff --cached --quiet; then
+            echo "No changes required"
+            exit 0
+          fi
+          git commit -m "Match Home 1 to approval reference"
+          git push
