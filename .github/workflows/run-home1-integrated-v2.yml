@@ -1,0 +1,30 @@
+name: Apply Home 1 integrated redesign
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/redesign_home1_integrated_v2.py'
+      - '.github/workflows/run-home1-integrated-v2.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply Home 1 integrated redesign
+        run: python3 scripts/redesign_home1_integrated_v2.py
+      - name: Commit Home 1 integrated redesign
+        run: |
+          if git diff --quiet -- home1.html; then
+            echo "No changes required"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add home1.html
+          git commit -m "Redesign Home 1 integrated security section"
+          git push
