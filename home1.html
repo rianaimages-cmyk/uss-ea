@@ -4853,6 +4853,251 @@
       }
     }
 
+  
+
+    /* HOME1 INTEGRATED COMMAND CENTER V2 */
+    .home-one .integrated-approach{
+      position:relative;
+      overflow:hidden;
+      padding:112px 0 120px !important;
+      background:#ffffff !important;
+      color:#0f1726 !important;
+    }
+    .home-one .integrated-approach::before{
+      content:"";
+      position:absolute;
+      width:520px;
+      height:520px;
+      right:-260px;
+      top:-250px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(20,86,141,.08),rgba(20,86,141,0) 68%);
+      pointer-events:none;
+    }
+    .home-one .integrated-grid{
+      position:relative;
+      z-index:2;
+      width:min(1440px,calc(100% - 48px)) !important;
+      margin:0 auto !important;
+      display:grid !important;
+      grid-template-columns:minmax(360px,.82fr) minmax(620px,1.18fr) !important;
+      gap:72px !important;
+      align-items:center !important;
+    }
+    .home-one .integrated-copy{
+      max-width:620px;
+    }
+    .home-one .integrated-copy .section-number{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:22px;
+      color:var(--uss-red) !important;
+      font-size:12px !important;
+      font-weight:700 !important;
+      letter-spacing:.12em !important;
+    }
+    .home-one .integrated-copy .section-number::before{
+      content:"";
+      width:34px;
+      height:3px;
+      border-radius:999px;
+      background:var(--uss-red);
+      flex:0 0 auto;
+    }
+    .home-one .integrated-copy h2{
+      max-width:650px !important;
+      margin:0 0 26px !important;
+      color:#0f1726 !important;
+      font-size:var(--section-title-size) !important;
+      line-height:1.03 !important;
+      font-weight:700 !important;
+      letter-spacing:-.04em !important;
+      text-wrap:balance !important;
+    }
+    .home-one .integrated-copy h2 span{color:var(--uss-blue) !important;}
+    .home-one .integrated-copy p{
+      max-width:590px !important;
+      margin:0 0 18px !important;
+      color:#67768a !important;
+      font-size:15px !important;
+      line-height:1.76 !important;
+      font-weight:400 !important;
+    }
+
+    /* New command-center composition */
+    .home-one .integration-visual{
+      position:relative !important;
+      min-height:auto !important;
+      padding:18px !important;
+      overflow:hidden !important;
+      border:1px solid #dce7f1 !important;
+      border-radius:30px !important;
+      background:#f5f8fb !important;
+      box-shadow:0 28px 70px rgba(10,42,73,.10) !important;
+    }
+    .home-one .integration-visual::before{
+      content:"";
+      position:absolute;
+      left:-100px;
+      top:-110px;
+      width:300px;
+      height:300px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(20,86,141,.12),rgba(20,86,141,0) 70%);
+      pointer-events:none;
+    }
+    .home-one .integration-hub-card{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:minmax(220px,.7fr) minmax(0,1.3fr);
+      gap:18px;
+      min-height:180px;
+      padding:28px;
+      border-radius:22px;
+      background:linear-gradient(135deg,#071d37 0%,#0c3f6d 66%,#14568d 100%);
+      box-shadow:0 20px 44px rgba(7,29,55,.18);
+      color:#fff;
+    }
+    .home-one .integration-hub-main{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      min-width:0;
+    }
+    .home-one .integration-hub-main strong{
+      display:block;
+      max-width:260px;
+      color:#fff;
+      font-size:31px;
+      line-height:1.02;
+      font-weight:700;
+      letter-spacing:-.035em;
+    }
+    .home-one .integration-hub-main small{
+      display:block;
+      margin-top:11px;
+      color:#6fc8ff;
+      font-size:11px;
+      line-height:1.35;
+      font-weight:700;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .home-one .integration-hub-lines{
+      position:relative;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:9px;
+      align-content:center;
+    }
+    .home-one .integration-hub-lines span{
+      height:8px;
+      border-radius:999px;
+      background:rgba(255,255,255,.11);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .home-one .integration-hub-lines span:nth-child(2),
+    .home-one .integration-hub-lines span:nth-child(5){background:rgba(226,33,42,.78);}
+    .home-one .integration-hub-lines span:nth-child(3),
+    .home-one .integration-hub-lines span:nth-child(4){background:rgba(76,185,223,.62);}
+
+    .home-one .integration-system-grid{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin-top:10px;
+    }
+    .home-one .integration-system-card{
+      position:relative;
+      min-height:126px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:16px;
+      padding:20px 20px 18px 22px;
+      overflow:hidden;
+      border:1px solid #dfe8f0;
+      border-radius:18px;
+      background:#fff;
+      box-shadow:0 10px 24px rgba(8,35,64,.04);
+      transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+    }
+    .home-one .integration-system-card:hover{
+      transform:translateY(-3px);
+      border-color:#bad2e5;
+      box-shadow:0 16px 32px rgba(8,35,64,.08);
+    }
+    .home-one .integration-system-card::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:18px;
+      bottom:18px;
+      width:3px;
+      border-radius:0 999px 999px 0;
+      background:var(--uss-blue);
+    }
+    .home-one .integration-system-card:nth-child(3n+2)::before{background:var(--uss-red);}
+    .home-one .integration-system-card h3{
+      margin:0 !important;
+      color:#142035 !important;
+      font-size:16px !important;
+      line-height:1.22 !important;
+      font-weight:600 !important;
+      letter-spacing:-.015em !important;
+    }
+    .home-one .integration-system-card p{
+      margin:0 !important;
+      color:#6c7b8c !important;
+      font-size:12px !important;
+      line-height:1.55 !important;
+      font-weight:400 !important;
+    }
+    .home-one .integration-system-card--wide{
+      grid-column:1 / -1;
+      min-height:112px;
+      display:grid;
+      grid-template-columns:minmax(180px,.65fr) minmax(0,1.35fr);
+      align-items:center;
+      gap:28px;
+    }
+
+    @media (max-width:1100px){
+      .home-one .integrated-grid{
+        grid-template-columns:1fr !important;
+        gap:42px !important;
+      }
+      .home-one .integrated-copy{max-width:860px;}
+      .home-one .integrated-copy p{max-width:760px !important;}
+    }
+    @media (max-width:680px){
+      .home-one .integrated-approach{padding:76px 0 84px !important;}
+      .home-one .integrated-grid{width:calc(100% - 24px) !important;gap:30px !important;}
+      .home-one .integrated-copy p{font-size:14px !important;line-height:1.7 !important;}
+      .home-one .integration-visual{padding:10px !important;border-radius:22px !important;}
+      .home-one .integration-hub-card{
+        grid-template-columns:1fr !important;
+        min-height:210px;
+        padding:22px !important;
+        border-radius:18px !important;
+      }
+      .home-one .integration-hub-main strong{font-size:27px;}
+      .home-one .integration-hub-lines{grid-template-columns:repeat(3,1fr);}
+      .home-one .integration-system-grid{grid-template-columns:1fr !important;gap:8px !important;}
+      .home-one .integration-system-card,
+      .home-one .integration-system-card--wide{
+        grid-column:auto !important;
+        min-height:112px !important;
+        display:flex !important;
+        padding:18px 18px 16px 20px !important;
+      }
+      .home-one .integration-system-card h3{font-size:15px !important;}
+    }
+
   </style>
 </head>
 <body class="home-one">
@@ -5078,7 +5323,7 @@
 </div>
 </section>
 <section aria-labelledby="integrated-approach-title" class="integrated-approach" id="integrated-security-approach">
-<div class="shell integrated-grid">
+<div class="integrated-grid">
 <div class="integrated-copy">
 <div class="section-number">05 — INTEGRATED SECURITY APPROACH</div>
 <h2 id="integrated-approach-title">One partner. <span>Connected systems.</span> Better visibility.</h2>
@@ -5086,16 +5331,24 @@
 <p>This helps security and facility teams reduce isolated workflows, improve situational awareness, and respond to events with better context from one central point of control.</p>
 </div>
 <div aria-label="Connected security systems visual" class="integration-visual">
-<div class="integration-orbit"></div>
-<span class="orbit-dot dot-a"></span><span class="orbit-dot dot-b"></span><span class="orbit-dot dot-c"></span><span class="orbit-dot dot-d"></span>
-<div class="integration-hub"><div class="hub-shield"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24"><path d="M12 3 5.5 5.5v5.6c0 4.4 2.7 7.8 6.5 9.9 3.8-2.1 6.5-5.5 6.5-9.9V5.5L12 3Z" stroke-width="1.7"/><path d="m9.2 12 1.8 1.8 3.9-4" stroke-width="1.7"/></svg></div><strong>Integrated<br/>Security</strong><span>One operating<br/>environment</span></div>
-<div class="system-node node-1"><div class="node-head"><span class="node-icon"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24"><path d="m4 10 11-4 2 5-11 4-2-5Z" stroke-width="1.7"/><path d="m16.5 9.5 3.5 2v4M8 14.5l-2 4" stroke-width="1.7" stroke-linecap="round"/></svg></span><strong>Surveillance</strong></div><p>Real-time monitoring and recordings</p></div>
-<div class="system-node node-2"><div class="node-head"><span class="node-icon"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24"><path d="M12 3 5.5 5.7v5.4c0 4.1 2.5 7.3 6.5 9.4 4-2.1 6.5-5.3 6.5-9.4V5.7L12 3Z" stroke-width="1.7"/><path d="m9 11.7 2 2 4-4" stroke-width="1.7"/></svg></span><strong>Intrusion<br/>Detection</strong></div><p>Detect threats and unauthorized access</p></div>
-<div class="system-node node-3"><div class="node-head"><span class="node-icon"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24"><path d="M13.5 3.8c.8 3.4-.9 4.6-2.1 6.1-1.1 1.4-1.7 2.6-1.1 4.3.5 1.4 1.7 2.3 3.2 2.4 2.3.1 4.1-1.8 4-4.2-.1-2.7-1.7-5.2-4-8.6Z" stroke-width="1.7"/><path d="M10.4 8.6C7.8 10.2 6.5 12.4 6.7 15c.2 3.1 2.6 5.2 5.6 5.2 2.7 0 4.8-1.6 5.5-4" stroke-width="1.7"/></svg></span><strong>Fire<br/>Alarms</strong></div><p>Early detection and life safety systems</p></div>
-<div class="system-node node-4"><div class="node-head"><span class="node-icon"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24"><path d="M5 4h12v16H5z" stroke-width="1.7"/><path d="M15 12h5M18 9l3 3-3 3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><strong>Access<br/>Control</strong></div><p>Secure access for people and vehicles</p></div>
-<div class="system-node node-5"><div class="node-head"><span class="node-icon"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24"><path d="M7 20V4h5.2a4.3 4.3 0 0 1 0 8.6H7" stroke-width="1.8"/><path d="M7 12.6h5" stroke-width="1.8"/></svg></span><strong>Parking<br/>Management</strong></div><p>Smart parking, guidance and seamless entry</p></div>
-<div class="system-node node-6"><div class="node-head"><span class="node-icon"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24"><path d="M4 10v4h3l5 4V6l-5 4H4Z" stroke-width="1.7" stroke-linejoin="round"/><path d="M15 9c1.5 1.7 1.5 4.3 0 6M18 7c2.7 2.8 2.7 7.2 0 10" stroke-width="1.7" stroke-linecap="round"/></svg></span><strong>Public<br/>Address</strong></div><p>Instant communication in critical moments</p></div>
-<div class="system-node node-7"><div class="node-head"><span class="node-icon"><svg aria-hidden="true" fill="none" viewBox="0 0 24 24"><path d="M4 20V8l6-3v15M10 20V4l10 4v12M7 11h1M7 14h1M13 9h1M17 10h1M13 13h1M17 14h1" stroke-width="1.6" stroke-linecap="round"/></svg></span><strong>Building<br/>Technologies</strong></div><p>HVAC, Lighting, Energy, Elevators &amp; more</p></div>
+<div class="integration-hub-card">
+<div class="integration-hub-main">
+<strong>Integrated Security</strong>
+<small>ONE OPERATING ENVIRONMENT</small>
+</div>
+<div aria-hidden="true" class="integration-hub-lines">
+<span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+</div>
+<div class="integration-system-grid">
+<article class="integration-system-card integration-system-card--wide"><h3>Building Technologies</h3><p>HVAC, Lighting, Energy, Elevators &amp; more</p></article>
+<article class="integration-system-card"><h3>Surveillance</h3><p>Real-time monitoring and recordings</p></article>
+<article class="integration-system-card"><h3>Intrusion Detection</h3><p>Detect threats and unauthorized access</p></article>
+<article class="integration-system-card"><h3>Public Address</h3><p>Instant communication in critical moments</p></article>
+<article class="integration-system-card"><h3>Fire Alarms</h3><p>Early detection and life safety systems</p></article>
+<article class="integration-system-card"><h3>Parking Management</h3><p>Smart parking, guidance and seamless entry</p></article>
+<article class="integration-system-card"><h3>Access Control</h3><p>Secure access for people and vehicles</p></article>
+</div>
 </div>
 </div>
 </section>
